@@ -11,7 +11,8 @@ import { Id } from "../../../convex/_generated/dataModel";
 
 export function KnowledgePanel({ documentId }: { documentId: string }) {
   // Real Data
-  const knowledgeItems = useQuery("knowledge:getByDocument" as any, { documentId: documentId as Id<"documents"> });
+  const shouldSkip = documentId === "new-doc-id";
+  const knowledgeItems = useQuery(shouldSkip ? "skip" : "knowledge:getByDocument" as any, shouldSkip ? "skip" : { documentId: documentId as Id<"documents"> });
   const createKnowledge = useMutation("knowledge:create" as any);
   const removeKnowledge = useMutation("knowledge:remove" as any);
 

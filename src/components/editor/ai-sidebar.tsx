@@ -14,7 +14,8 @@ export function AISidebar({ documentId }: { documentId: string }) {
   const [isLoading, setIsLoading] = useState(false);
 
   // Fetch knowledge items
-  const knowledgeItems = useQuery("knowledge:getByDocument" as any, { documentId: documentId as Id<"documents"> });
+  const shouldSkip = documentId === "new-doc-id";
+  const knowledgeItems = useQuery(shouldSkip ? "skip" : "knowledge:getByDocument" as any, shouldSkip ? "skip" : { documentId: documentId as Id<"documents"> });
   
   // Initialize action
   const generateAIResponse = useAction("ai:generate" as any);

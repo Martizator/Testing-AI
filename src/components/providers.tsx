@@ -3,7 +3,9 @@
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
 
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "https://placeholder-url.convex.cloud");
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!, {
+  skipConvexDeploymentUrlCheck: true,
+});
 
 export function Providers({ children }: { children: ReactNode }) {
   return <ConvexProvider client={convex}>{children}</ConvexProvider>;
